@@ -1,0 +1,10 @@
+#parse("/common/copyright.vm")
+</div>
+##    #parse("/admin/models/chat_box.vm")
+##    #parse("/admin/models/chat_icon.vm")
+###parse("/admin/models/right_sidebar.vm")
+</div>
+
+
+
+

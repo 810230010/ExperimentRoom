@@ -1,0 +1,54 @@
+<nav class="navbar-default navbar-static-side" role="navigation">
+    <div class="sidebar-collapse">
+        <ul class="nav metismenu" id="side-menu">
+            <li class="nav-header">
+                <div class="dropdown profile-element"> <span>
+                    <span>
+                        #if ($admin.photo)
+                            <img alt="image" class="img-circle" src="$admin.photo" style="width: 100px;height: 100px"/>
+                        #else
+                            <img alt="image" class="img-circle" src="/static/img/a4.jpg" />
+                        #end
+                    </span>
+                    <a data-toggle="dropdown" class="dropdown-toggle" href="index.html#">
+                        <span class="clear">
+                            <span class="block m-t-xs"> <strong class="font-bold">江建平</strong></span>
+                            <span class="text-muted text-xs block">系统管理员 <b class="caret"></b></span>
+                        </span>
+                    </a>
+                    <ul class="dropdown-menu animated fadeInRight m-t-xs">
+                        <li><a href="/admin/profile">管理员信息</a></li>
+                        <li class="divider"></li>
+                        <li><a href="/admin/logout">注销</a></li>
+                    </ul>
+                </div>
+                <div class="logo-element">
+                    OS+
+                </div>
+            </li>
+            <li>
+                <a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">Dashboards</span> <span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level collapse">
+                    <li><a href="index.html">Dashboard v.1</a></li>
+                    <li><a href="dashboard_2.html">Dashboard v.2</a></li>
+                    <li><a href="dashboard_3.html">Dashboard v.3</a></li>
+                    <li><a href="dashboard_4_1.html">Dashboard v.4</a></li>
+                    <li><a href="dashboard_5.html">Dashboard v.5 </a></li>
+                </ul>
+            </li>
+##            #foreach( $menu in $menus)
+##                <li id="$menu.name">
+##                    <a href="#"><i class="fa $menu.icon"></i> <span class="nav-label">$menu.name</span> <span class="fa arrow"></span></a>
+##                    <ul class="nav nav-second-level">
+##                        #if ($menu.childMenus)
+##                            #foreach( $item in $menu.childMenus)
+##                                <li id="$item.name"><a href="$item.href">$item.name</a></li>
+##                            #end
+##                        #end
+##                    </ul>
+##                </li>
+##            #end
+        </ul>
+
+    </div>
+</nav>

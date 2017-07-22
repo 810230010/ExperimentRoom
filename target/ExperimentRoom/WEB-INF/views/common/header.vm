@@ -1,0 +1,7 @@
+</head>
+<body>
+<div id="wrapper">
+    #parse("/common/left-nav.vm")
+
+    <div id="page-wrapper" class="gray-bg dashbard-1">
+        #parse("/common/top-nav.vm")

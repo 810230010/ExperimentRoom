@@ -1,0 +1,88 @@
+#parse("/common/begin.vm")
+
+#parse("/common/header.vm")
+<div class="wrapper wrapper-content" style="height: 1000px">
+    <div class="row">
+        <div class="col-lg-3" >
+            <div class="widget style1">
+                <div class="row">
+                    <div class="col-xs-4 text-center">
+                        <i class="fa fa-trophy fa-5x"></i>
+                    </div>
+                    <div class="col-xs-8 text-right">
+                        <span> Today income </span>
+                        <h2 class="font-bold"></h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            <div class="widget style1 navy-bg">
+                <div class="row">
+                    <div class="col-xs-4">
+                        <i class="fa fa-cloud fa-5x"></i>
+                    </div>
+                    <div class="col-xs-8 text-right">
+                        <span> 今日订单数 </span>
+                        <h2 class="font-bold"></h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            <div class="widget style1 lazur-bg">
+                <div class="row">
+                    <div class="col-xs-4">
+                        <i class="fa fa-comment-o fa-5x"></i>
+                    </div>
+                    <div class="col-xs-8 text-right">
+                        <span> 今日评论数 </span>
+                        <h2 class="font-bold"></h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            <div class="widget style1 yellow-bg">
+                <div class="row">
+                    <div class="col-xs-4">
+                        <i class="fa fa-shopping-cart fa-5x"></i>
+                    </div>
+                    <div class="col-xs-8 text-right">
+                        <span> 商品总数 </span>
+                        <h2 class="font-bold"></h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-12" style="background-color:white;border:1px solid silver; margin-top: 20px; padding-bottom: 20px">
+            <div class="" style="margin-top: 14px;">
+                <h5 class="pull-left"><i class="label-success fa fa-user-circle-o" style="margin-right: 10px;"></i>个人会员信息</h5>
+                <label class="pull-right">(单位: 个)</label>
+            </div>
+            <div class="border" style="clear:both;border-bottom: 2px solid gray"></div>
+            <div class="text-center" style="margin-top:20px">
+                <div class="col-lg-3">
+                    <h1 class="no-margins"></h1>
+                    <small>今日新增</small>
+                </div>
+                <div class="col-lg-3">
+                    <h1 class="no-margins"></h1>
+                    <small>昨日新增</small>
+                </div>
+                <div class="col-lg-3">
+                    <h1 class="no-margins"></h1>
+                    <small>本月新增</small>
+                </div>
+                <div class="col-lg-3">
+                    <h1 class="no-margins"></h1>
+                    <small>会员人数</small>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-12" style="height:40px"></div>
+
+</div>
+#parse("/common/footer.vm")
+
+#parse("/common/end.vm")
