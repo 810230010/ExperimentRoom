@@ -1,0 +1,30 @@
+package com.nit.experiment.common.util;
+
+import com.nit.experiment.entity.User;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
+/**
+ * Created by 江建平 on 2017/7/24.
+ */
+public class WebUtil {
+    private static final String CURRENT_USER = "currentUser";
+    /**
+     * 得到当前用户
+     * @return
+     */
+    public static User getCurrentUser(HttpServletRequest request){
+        HttpSession session = request.getSession();
+        return (User)session.getAttribute(CURRENT_USER);
+    }
+
+    /**
+     * 销毁当前session
+     * @param request
+     */
+    public static void logoutUser(HttpServletRequest request){
+        HttpSession session = request.getSession();
+        session.invalidate();
+    }
+}

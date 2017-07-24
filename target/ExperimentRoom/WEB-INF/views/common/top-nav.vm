@@ -5,13 +5,13 @@
         </div>
         <ul class="nav navbar-top-links navbar-right">
             <li>
-                <a href="/admin/index" class="m-r-sm text-muted welcome-message">首页</a>
+                <a href="/user/index" class="m-r-sm text-muted welcome-message">首页</a>
             </li>
             <li>
                 <span class="m-r-sm text-muted welcome-message">欢迎管使用SHOPOS</span>
             </li>
             <li>
-                <a href="/admin/logout" style="color: red">
+                <a href="/user/logout" style="color: red">
                     <i class="fa fa-sign-out">注销</i>
                 </a>
             </li>

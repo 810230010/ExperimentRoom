@@ -5,6 +5,21 @@
   <!--根据用户名和密码查询-->
   <select id="queryUserByUsernameAndPassword" resultType="com.nit.experiment.entity.User">
     select * from t_user
-    where user_name = #{userName} and password = #{password};
+    where stu_no = #{userName} and password = #{password}
+  </select>
+  <!--查询所有用户-->
+  <select id="selectAllUsers" resultType="com.nit.experiment.entity.User">
+    select * from t_user
+    <where>
+      <if test="searchKey != null and searchKey != '' ">
+        (user_name like CONCAT('%', #{searchKey, jdbcType=VARCHAR}, '%')
+        or stu_no like CONCAT('%', #{searchKey, jdbcType=VARCHAR}, '%'))
+      </if>
+    </where>
+    order by
+    <if test="orderColumn != null and orderColumn !='' and orderType != null and orderType != '' ">
+      ${orderColumn} ${orderType},
+    </if>
+    user_id asc
   </select>
 </mapper>
