@@ -24,4 +24,5 @@ public interface UserMapper extends BaseDao<User>{
      */
     List<User> selectAllUsers(@Param("searchKey") String searchKey, @Param("orderColumn") String orderColumn, @Param("orderType") String orderType);
 
+
 }

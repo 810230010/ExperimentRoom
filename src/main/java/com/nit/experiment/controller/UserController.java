@@ -2,6 +2,7 @@ package com.nit.experiment.controller;
 
 import com.nit.experiment.common.controller.PageResult;
 import com.nit.experiment.common.util.StringUtils;
+import com.nit.experiment.common.util.WebUtil;
 import com.nit.experiment.dto.UserLoginDTO;
 import com.nit.experiment.entity.User;
 import com.nit.experiment.service.UserService;
@@ -13,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.nio.charset.Charset;
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
@@ -26,10 +27,17 @@ class UserController {
     @Autowired
     private UserService userService;
 
+    /**
+     * 登陆
+     * @param model
+     * @param user
+     * @return
+     */
     @RequestMapping("/login")
-    public String login(Model model, UserLoginDTO user){
-        logger.info(userService.queryUser(user));
-        if(userService.queryUser(user)){
+    public String login(Model model, UserLoginDTO user, HttpServletRequest request){
+        User result = userService.queryUser(user);
+        if(result != null){
+            WebUtil.setCurrentUser(request, result);
             return "redirect:/user/index";
         }
         model.addAttribute("msg", "<font color='red'>用户名或密码错误</font>");
@@ -40,49 +48,20 @@ class UserController {
      * @return
      */
     @RequestMapping("/index")
-    public String test1(){
+    public String view2indexPage(){
         return "index";
     }
 
-    /**
-     * 实验室成员列表页面
-     * @return
-     */
-    @RequestMapping("/memberListPage")
-    public String view2MemberListPage(){
-        return "member_list";
-    }
 
-    /**
-     * 查询所有用户
-     * @param draw
-     * @param searchKey
-     * @param orderColumn
-     * @param orderType
-     * @param page
-     * @param pageSize
-     * @return
-     */
-    @RequestMapping("/searchAllUsers")
-    @ResponseBody
-    public Object searchAllUsers( @RequestParam("draw") int draw,
-                                  @RequestParam(value = "searchKey", required = false) String searchKey,
-                                  @RequestParam(value = "orderColumn", required = false) String orderColumn,
-                                  @RequestParam(value = "orderType", required = false) String orderType,
-                                  @RequestParam(value = "page", required = false, defaultValue = "1") Integer page,
-                                  @RequestParam(value = "pageSize", required = false, defaultValue = "10") Integer pageSize){
-        orderColumn = StringUtils.camelToUnderline(orderColumn);
-        List<User> userList= userService.searchAllUsers(page, pageSize, searchKey, orderColumn, orderType);
-        return new PageResult<User>(userList, draw);
-    }
+
 
     /**
      * 用户注销
      * @return
      */
     @RequestMapping("/logout")
-    @ResponseBody
-    public String logout(){
-        return null;
+    public String logout(HttpServletRequest request){
+        WebUtil.logoutUser(request);
+        return "redirect:/login.jsp";
     }
 }

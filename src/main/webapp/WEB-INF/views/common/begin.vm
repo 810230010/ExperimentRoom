@@ -13,11 +13,16 @@
 
     <link href="/static/css/animate/animate.css" rel="stylesheet">
     <link href="/static/css/style.css" rel="stylesheet">
+    <!--sweet alert css-->
+    <link href="/static/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
     <!-- Mainly scripts -->
     <script src="/static/js/jquery-3.1.1.min.js"></script>
     <script src="/static/js/bootstrap.min.js"></script>
     <script src="/static/js/plugins/metisMenu/jquery.metisMenu.js"></script>
     <script src="/static/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+
+    <!--sweetalert scripts-->
+    <script src="/static/js/plugins/sweetalert/sweetalert.min.js"></script>
 
     <!-- Custom and plugin javascript -->
     <script src="/static/js/inspinia.js"></script>

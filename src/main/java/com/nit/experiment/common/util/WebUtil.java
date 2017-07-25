@@ -1,5 +1,6 @@
 package com.nit.experiment.common.util;
 
+import com.nit.experiment.dto.UserLoginDTO;
 import com.nit.experiment.entity.User;
 
 import javax.servlet.http.HttpServletRequest;
@@ -26,5 +27,15 @@ public class WebUtil {
     public static void logoutUser(HttpServletRequest request){
         HttpSession session = request.getSession();
         session.invalidate();
+    }
+
+    /**
+     * 存储当前登陆的用户
+     * @param request
+     * @param currentUser
+     */
+    public static void setCurrentUser(HttpServletRequest request, User currentUser){
+        HttpSession session = request.getSession();
+        session.setAttribute(CURRENT_USER, currentUser);
     }
 }

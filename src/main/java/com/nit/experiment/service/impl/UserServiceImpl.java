@@ -21,15 +21,17 @@ public class UserServiceImpl implements UserService {
     private UserMapper userMapper;
 
 
-    public boolean queryUser(UserLoginDTO user) {
-        if(userMapper.queryUserByUsernameAndPassword(user) != null){
-            return true;
-        }
-        return false;
+    public User queryUser(UserLoginDTO user) {
+        return userMapper.queryUserByUsernameAndPassword(user);
     }
 
     public List<User> searchAllUsers(int page, int pageSize, String searchKey, String orderColumn, String orderType){
         PageHelper.startPage(page, pageSize);
         return userMapper.selectAllUsers(searchKey, orderColumn, orderType);
+    }
+
+    @Override
+    public int deleteOneUser(Integer userId) {
+        return userMapper.deleteByPrimaryKey(userId);
     }
 }

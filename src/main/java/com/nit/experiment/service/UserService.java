@@ -14,7 +14,7 @@ public interface UserService {
      * @param user
      * @return
      */
-    boolean queryUser(UserLoginDTO user);
+    User queryUser(UserLoginDTO user);
 
     /**
      * 查找所有用户
@@ -26,4 +26,11 @@ public interface UserService {
      * @return
      */
     List<User> searchAllUsers(int page, int pageSize, String searchKey, String orderColumn, String orderType);
+
+    /**
+     * 删除某个用户
+     * @param userId
+     * @return
+     */
+    int deleteOneUser(Integer userId);
 }
