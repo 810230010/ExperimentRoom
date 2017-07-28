@@ -38,4 +38,21 @@ public class WebUtil {
         HttpSession session = request.getSession();
         session.setAttribute(CURRENT_USER, currentUser);
     }
+
+    /**
+     * 得到根路径
+     * @param request
+     * @return
+     */
+    public static String getBaseUrl(HttpServletRequest request){
+        return request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort();
+    }
+
+    public static String getExcelTemplateUrl(HttpServletRequest request){
+        return getBaseUrl(request) + "/" + "template" + "/add_member_template.xls";
+    }
+
+    public static String getUploadPath(HttpServletRequest request){
+        return getBaseUrl(request) + "/upload";
+    }
 }

@@ -3,6 +3,7 @@ package com.nit.experiment.service;
 import com.nit.experiment.dto.UserLoginDTO;
 import com.nit.experiment.entity.User;
 
+import java.io.InputStream;
 import java.util.List;
 
 /**
@@ -33,4 +34,21 @@ public interface UserService {
      * @return
      */
     int deleteOneUser(Integer userId);
+
+    /**
+     * 根据主键查找用户
+     * @param userId
+     * @return
+     */
+    User findUserByPrimaryKey(Integer userId);
+
+    /**
+     * 修改成员角色
+     * @param userId
+     * @param role
+     * @return
+     */
+    int updateMemberRole(Integer userId, String role);
+
+    int addMemberByExcel(InputStream in);
 }

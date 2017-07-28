@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link href="/static/css/bootstrap/bootstrap.min.css" rel="stylesheet">
+    <link href="/static/css/style.css" rel="stylesheet">
+    <!--sweet alert css-->
+    <link href="/static/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+
+    <script src="/static/js/jquery-3.1.1.min.js"></script>
+    <script src="/static/js/bootstrap.min.js"></script>
+    <!--sweetalert scripts-->
+    <script src="/static/js/plugins/sweetalert/sweetalert.min.js"></script>
+    <!--layer-->
+    <script src="/static/js/plugins/layer/layer.js"></script>
+</head>
+
+<body>
+
+    <div class="ibox">
+        <div class="ibox-title">
+            <h3 id="rank">角色选择</h3>
+            <a id="back" hidden="hidden"> <i class="fa fa-reply" style="color: #777777"></i></a>
+        </div>
+        <div class="ibox-content">
+            <form class="form-horizontal">
+                <label for="name">选择列表</label>
+                <div class="form-group">
+                    <select id="role" class="form-control">
+                        <option value="TEACHER">指导老师</option>
+                        <option value="ADMIN">实验室负责人</option>
+                        <option value="MEMBER">无</option>
+                    </select>
+                </div>
+
+                <div class="hr-line-dashed"></div>
+                <div class="form-group">
+                    <div class="text-center">
+                        <input id="edit" type="button" class="btn btn-success" value="修改"/>
+                    </div>
+                </div>
+                <input type="hidden" id="flag"/>
+            </form>
+        </div>
+    </div>
+</body>
+<script>
+$("#edit").click(function () {
+    $.ajax({
+        url: "/member/editMemberRole",
+        data: {
+            "userId": $userId,
+              "role": $("#role").val()
+        },
+        success: function (result) {
+            if(result.code == 200){
+               parent.$("#flag").val("yes");
+               parent.layer.closeAll()
+            }
+        },
+        error: function () {
+            alert("系统出错")
+        }
+    })
+})
+var callbackdata = function () {
+    var data = {
+        flag: $("#flag").val()
+    };
+    return data;
+}
+</script>
+</html>

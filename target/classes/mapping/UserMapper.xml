@@ -1,6 +1,26 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.nit.experiment.dao.UserMapper" >
+  <!--批量导入成员-->
+  <insert id="addMemberByExcel" parameterType="java.util.List">
+    insert into t_user(user_name,stu_no,class_name,user_type,sex,phone,email,qq,create_time) values
+    <foreach collection="list" item="item" index="index" separator=",">
+      (#{item.userName},
+      #{item.stuNo},
+      #{item.className},
+      #{item.userType},
+      #{item.sex},
+      #{item.phone},
+      #{item.email},
+      #{item.qq},
+      #{item.createTime})
+    </foreach>
+  </insert>
+  <!--更改成员角色-->
+  <update id="updateMemberRoleByPrimaryKey">
+    update t_user set userType = #{role}
+    where userId = #{userId}
+  </update>
 
   <!--根据用户名和密码查询-->
   <select id="queryUserByUsernameAndPassword" resultType="com.nit.experiment.entity.User">

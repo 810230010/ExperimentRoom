@@ -1,7 +1,6 @@
 package com.nit.experiment.controller;
 
-import com.nit.experiment.common.controller.PageResult;
-import com.nit.experiment.common.util.StringUtils;
+
 import com.nit.experiment.common.util.WebUtil;
 import com.nit.experiment.dto.UserLoginDTO;
 import com.nit.experiment.entity.User;
@@ -11,11 +10,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.List;
+
 
 /**
  * Created by 江建平 on 2017/7/22.

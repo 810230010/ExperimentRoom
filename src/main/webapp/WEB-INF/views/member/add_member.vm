@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link href="/static/css/bootstrap/bootstrap.min.css" rel="stylesheet">
+    <link href="/static/css/style.css" rel="stylesheet">
+    <!--sweet alert css-->
+    <link href="/static/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+
+    <script src="/static/js/jquery-3.1.1.min.js"></script>
+    <script src="/static/js/bootstrap.min.js"></script>
+    <!--sweetalert scripts-->
+    <script src="/static/js/plugins/sweetalert/sweetalert.min.js"></script>
+    <!--layer-->
+    <script src="/static/js/plugins/layer/layer.js"></script>
+</head>
+
+<body>
+
+<div class="ibox">
+    <div class="ibox-title">
+        <h3 id="rank">选择文件</h3>
+        <a id="back" hidden="hidden"> <i class="fa fa-reply" style="color: #777777"></i></a>
+    </div>
+    <div class="ibox-content">
+        <form class="form-horizontal" method="post" action="/member/uploadExcel" enctype="multipart/form-data">
+            <div class="form-group">
+                <div class="text-center">
+                    <div class="btn-group">
+##                        <label title="Upload image file" for="inputImage" class="btn btn-primary">
+##                            <input id="inputImage" type="file" accept="application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" name="file" class="hide">
+##                            Upload new image
+##                        </label>
+                        <input type="file" name="file" accept="application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" class="form-control"/>
+                    </div>
+                    <div class="form-group" style="margin-top: 20px">
+                    <input id="submit" type="submit" class="btn btn-success" value="上传"/>
+                    </div>
+                    <div><label style="color: green;">$!result</label></div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+
+</html>
