@@ -18,8 +18,8 @@
   </insert>
   <!--更改成员角色-->
   <update id="updateMemberRoleByPrimaryKey">
-    update t_user set userType = #{role}
-    where userId = #{userId}
+    update t_user set user_type = #{role}
+    where user_id = #{userId}
   </update>
 
   <!--根据用户名和密码查询-->

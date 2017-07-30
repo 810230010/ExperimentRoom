@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.nit.experiment.dao.UserQuestionMapper" >
+  <resultMap id="BaseResultMap" type="com.nit.experiment.entity.UserQuestion" >
+    <id column="user_question_id" property="userQuestionId" jdbcType="INTEGER" />
+    <result column="question_id" property="questionId" jdbcType="INTEGER" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="is_thumbup" property="isThumbup" jdbcType="BIT" />
+    <result column="is_collected" property="isCollected" jdbcType="BIT" />
+    <result column="is_commented" property="isCommented" jdbcType="BIT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    user_question_id, question_id, user_id, is_thumbup, is_collected, is_commented
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_user_question
+    where user_question_id = #{userQuestionId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_user_question
+    where user_question_id = #{userQuestionId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.nit.experiment.entity.UserQuestion" >
+    insert into t_user_question (user_question_id, question_id, user_id, 
+      is_thumbup, is_collected, is_commented
+      )
+    values (#{userQuestionId,jdbcType=INTEGER}, #{questionId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, 
+      #{isThumbup,jdbcType=BIT}, #{isCollected,jdbcType=BIT}, #{isCommented,jdbcType=BIT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.nit.experiment.entity.UserQuestion" >
+    insert into t_user_question
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="userQuestionId != null" >
+        user_question_id,
+      </if>
+      <if test="questionId != null" >
+        question_id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="isThumbup != null" >
+        is_thumbup,
+      </if>
+      <if test="isCollected != null" >
+        is_collected,
+      </if>
+      <if test="isCommented != null" >
+        is_commented,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="userQuestionId != null" >
+        #{userQuestionId,jdbcType=INTEGER},
+      </if>
+      <if test="questionId != null" >
+        #{questionId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="isThumbup != null" >
+        #{isThumbup,jdbcType=BIT},
+      </if>
+      <if test="isCollected != null" >
+        #{isCollected,jdbcType=BIT},
+      </if>
+      <if test="isCommented != null" >
+        #{isCommented,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.nit.experiment.entity.UserQuestion" >
+    update t_user_question
+    <set >
+      <if test="questionId != null" >
+        question_id = #{questionId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="isThumbup != null" >
+        is_thumbup = #{isThumbup,jdbcType=BIT},
+      </if>
+      <if test="isCollected != null" >
+        is_collected = #{isCollected,jdbcType=BIT},
+      </if>
+      <if test="isCommented != null" >
+        is_commented = #{isCommented,jdbcType=BIT},
+      </if>
+    </set>
+    where user_question_id = #{userQuestionId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.nit.experiment.entity.UserQuestion" >
+    update t_user_question
+    set question_id = #{questionId,jdbcType=INTEGER},
+      user_id = #{userId,jdbcType=INTEGER},
+      is_thumbup = #{isThumbup,jdbcType=BIT},
+      is_collected = #{isCollected,jdbcType=BIT},
+      is_commented = #{isCommented,jdbcType=BIT}
+    where user_question_id = #{userQuestionId,jdbcType=INTEGER}
+  </update>
+</mapper>

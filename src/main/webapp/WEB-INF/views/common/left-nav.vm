@@ -30,14 +30,22 @@
                 <a href="index.html"><i class="fa fa-group"></i> <span class="nav-label">成员信息</span> <span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse">
                     <li><a href="/member/memberListPage">成员列表</a></li>
-                    <li><a href="dashboard_2.html">Dashboard v.2</a></li>
                 </ul>
             </li>
             <li>
                 <a href="/question/questionListPage"><i class="fa fa-stack-overflow"></i> <span class="nav-label">讨论区</span> </a>
             </li>
             <li>
-                <a href="index.html"><i class="fa fa-user"></i> <span class="nav-label">个人信息管理</span> </a>
+                <a href="index.html"><i class="fa fa-user"></i> <span class="nav-label">个人信息管理</span> <span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level collapse">
+                    <li><a href="/member/memberListPage">个人资料</a></li>
+                </ul>
+                <ul class="nav nav-second-level collapse">
+                    <li><a href="/member/memberListPage">我的任务</a></li>
+                </ul>
+                <ul class="nav nav-second-level collapse">
+                    <li><a href="/member/memberListPage">我的问题</a></li>
+                </ul>
             </li>
             <li>
                 <a href="index.html"><i class="fa fa-building-o"></i> <span class="nav-label">任务大厅</span></a>

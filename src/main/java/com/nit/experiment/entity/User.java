@@ -122,22 +122,4 @@ public class User {
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
     }
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "userId=" + userId +
-                ", userName='" + userName + '\'' +
-                ", stuNo='" + stuNo + '\'' +
-                ", className='" + className + '\'' +
-                ", password='" + password + '\'' +
-                ", userType='" + userType + '\'' +
-                ", sex='" + sex + '\'' +
-                ", phone='" + phone + '\'' +
-                ", email='" + email + '\'' +
-                ", qq='" + qq + '\'' +
-                ", curriculum='" + curriculum + '\'' +
-                ", createTime=" + createTime +
-                '}';
-    }
 }
