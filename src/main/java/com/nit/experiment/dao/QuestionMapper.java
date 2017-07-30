@@ -56,4 +56,15 @@ public interface QuestionMapper extends BaseMapper<Question, Integer>{
      * @return
      */
     int insertUserQuestion(@Param("userId") Integer userId, @Param("questionId") Integer questionId);
+
+    /**
+     * 更改问题收藏状态
+     * @param userId
+     * @param questionId
+     * @param targetStatus
+     * @return
+     */
+    int updateQuestionCollectedStatus(@Param("userId") Integer userId, @Param("questionId") Integer questionId, @Param("targetStatus") Integer targetStatus);
+
+
 }

@@ -83,21 +83,15 @@
                                 '删除 <i class="fa fa-trash-o"></i>',
                                 '</a>',
                                 thumbup,
-                                '<a class="col-sm-3 table-button btn btn-info btn-xs table-action collect" href="javascript:void(0)">',
-                                '收藏 <i class="fa fa-folder"></i>',
-                                '</a>',
+                                collected,
                                 '<a class="col-sm-3 table-button btn btn-primary btn-xs table-action detail" href="javascript:void(0)">',
                                 '查看详情 <i class="fa fa-eye"></i>',
                                 '</a>'
                             ].join('');
                         }else{
                             return [
-                                '<a class="col-sm-4 btn btn-success btn-xs table-action thumbup" href="javascript:void(0)">',
-                                '点赞 <i class="fa fa-thumbs-o"></i>',
-                                '</a>',
-                                '<a class="col-sm-4 table-button btn btn-info btn-xs table-action collect" href="javascript:void(0)">',
-                                '收藏 <i class="fa fa-edit"></i>',
-                                '</a>',
+                                thumbup,
+                                collected,
                                 '<a class="col-sm-4 table-button btn btn-primary btn-xs table-action detail" href="javascript:void(0)">',
                                 '查看详情 <i class="fa fa-eye"></i>',
                                 '</a>'
@@ -142,8 +136,8 @@
                         if(result.code == 200){
                             swal("删除！", "该问题已删除。", "success");
                             setTimeout(function () {
-                                table.ajax().reload;
-                            },2000);
+                                window.location.reload()
+                            },1500);
                         }
                     },
                     error: function (result) {
@@ -164,19 +158,45 @@
                     success: function (result) {
                         if (result.code == 200) {
                             //提示层
-                            if(targetStatus == 0) layer.msg('取消点赞!');
+                            if (targetStatus == 0) layer.msg('取消点赞!');
                             else layer.msg('已点赞!');
                             //重新载入
                             setTimeout(function () {
                                 window.location.reload();
-                            },2000)
+                            }, 2000)
 
                         }
                     },
-                    error: function (result) {
-                        alert("系统出错")
+                        error: function (result) {
+                            alert("系统出错")
+                        }
+                    })
+        });
+
+        //收藏
+        table.on( 'click', '.collect', function () {
+            var tr = $(this).closest('tr');
+            var data = table.row(tr).data();
+            var targetStatus = data.collected == true?0:1;
+            $.ajax({
+                url: "/question/collect",
+                data: {"userId": $currentUser.userId, "questionId": data.questionId, "targetStatus":targetStatus},
+                success: function (result) {
+                    if (result.code == 200) {
+                        //提示层
+                        if (targetStatus == 0) layer.msg('取消收藏!');
+                        else layer.msg('已收藏!');
+                        //重新载入
+                        setTimeout(function () {
+                            window.location.reload();
+                        }, 2000)
+
                     }
-                })
+                },
+                error: function (result) {
+                    alert("系统出错")
+                }
+            })
         });
 
 
@@ -184,7 +204,7 @@
         table.on( 'click', '.detail', function () {
             var tr = $(this).closest('tr');
             var data = table.row(tr).data();
-            window.location.href = "/member/memberDetailPage?userId="+data.userId;
+            window.location.href = "/question/questionDetailPage?questionId=" + data.questionId;
         });
 //        $('#datatable tbody').on('click','tr td:nth-child(2)', function (e) {
 //            var name = $(this).text();

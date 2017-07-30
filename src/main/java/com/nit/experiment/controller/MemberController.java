@@ -139,7 +139,7 @@ public class MemberController {
                                    HttpServletRequest request) throws Exception{
         InputStream in = file.getInputStream();
         int affedtedRows = userService.addMemberByExcel(in);
-        model.addAttribute("result","success");
+        model.addAttribute("result","导入成功");
         return "member/add_member";
     }
 }

@@ -6,37 +6,15 @@ import org.codehaus.jackson.map.annotate.JsonSerialize;
 import java.util.Date;
 
 /**
- * Created by 江建平 on 2017/7/28.
+ * Created by 江建平 on 2017/7/30.
  */
-public class QuestionListDTO {
+public class QuestionDetailDTO {
     private Integer questionId;
     private String title;
     private String content;
     private String category;
     private String userName;
-    private Integer viewNo;
-    private Integer thumbupNo;
-    private Integer answerNo;
-    private boolean collected;
-    private boolean thumbup;
     private Date createTime;
-
-    public boolean isCollected() {
-        return collected;
-    }
-
-    public void setCollected(boolean collected) {
-        this.collected = collected;
-    }
-
-    public boolean isThumbup() {
-        return thumbup;
-    }
-
-    public void setThumbup(boolean thumbup) {
-        this.thumbup = thumbup;
-    }
-
 
     public Integer getQuestionId() {
         return questionId;
@@ -76,30 +54,6 @@ public class QuestionListDTO {
 
     public void setUserName(String userName) {
         this.userName = userName;
-    }
-
-    public Integer getViewNo() {
-        return viewNo;
-    }
-
-    public void setViewNo(Integer viewNo) {
-        this.viewNo = viewNo;
-    }
-
-    public Integer getThumbupNo() {
-        return thumbupNo;
-    }
-
-    public void setThumbupNo(Integer thumbupNo) {
-        this.thumbupNo = thumbupNo;
-    }
-
-    public Integer getAnswerNo() {
-        return answerNo;
-    }
-
-    public void setAnswerNo(Integer answerNo) {
-        this.answerNo = answerNo;
     }
     @JsonSerialize(using=JsonDateUtil.JsonDateSerializer.class)
     public Date getCreateTime() {

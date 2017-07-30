@@ -56,4 +56,17 @@ public class QuestionServiceImpl implements QuestionService {
         //更新点赞
         return questionMapper.updateThumbup(userId, questionId, targetStatus);
     }
+
+    @Override
+    public int updateQuestionCollectedStatus(Integer userId, Integer questionId, Integer targetStatus) {
+        int result = questionMapper.existenceOfUserQuestion(userId, questionId);
+        //如果result=1说明该记录已存在，只需更新,否则先插入在更新
+        if(result == 1){
+            return questionMapper.updateQuestionCollectedStatus(userId, questionId, targetStatus);
+        }
+        //插入一条记录
+        questionMapper.insertUserQuestion(userId, questionId);
+        //更新点赞
+        return questionMapper.updateQuestionCollectedStatus(userId, questionId, targetStatus);
+    }
 }

@@ -16,6 +16,11 @@
     update t_user_question set is_thumbup = #{targetStatus}
     where user_id = #{userId} and question_id = #{questionId}
   </update>
+  <!--更新问题收藏状态-->
+  <update id="updateQuestionCollectedStatus">
+      update t_user_question set is_collected = #{targetStatus}
+      where user_id = #{userId} and question_id = #{questionId}
+  </update>
   <!--条件查询所有问题-->
   <select id="selectAllQuestions" resultType="com.nit.experiment.dto.QuestionListDTO">
     select a.question_id, a.title, a.content, a.category, a.view_no, a.thumbup_no, a.answer_no, a.create_time, b.user_name from t_question a, t_user b

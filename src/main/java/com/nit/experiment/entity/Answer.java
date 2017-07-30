@@ -5,6 +5,8 @@ import java.util.Date;
 public class Answer {
     private Integer answerId;
 
+    private Integer parentId;
+
     private Integer questionId;
 
     private Integer userId;
@@ -23,6 +25,14 @@ public class Answer {
 
     public void setAnswerId(Integer answerId) {
         this.answerId = answerId;
+    }
+
+    public Integer getParentId() {
+        return parentId;
+    }
+
+    public void setParentId(Integer parentId) {
+        this.parentId = parentId;
     }
 
     public Integer getQuestionId() {

@@ -37,5 +37,6 @@ public interface QuestionService {
       */
      int updateThumbupStatus(Integer userId, Integer questionId, Integer targetStatus);
 
+     int updateQuestionCollectedStatus(Integer userId, Integer questionId, Integer targetStatus);
 
 }

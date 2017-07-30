@@ -11,6 +11,7 @@ import com.nit.experiment.service.QuestionService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -78,7 +79,7 @@ public class QuestionController {
      * 更改点赞状态
      * @param userId
      * @param questionId
-     * @param targetStatus
+     * @param targetStatus 0:取消点赞  1:点赞
      * @return
      */
     @RequestMapping("/thumbup")
@@ -87,5 +88,25 @@ public class QuestionController {
         RestResult result = new RestResult();
         int affectedRow = questionService.updateThumbupStatus(userId, questionId, targetStatus);
         return result;
+    }
+
+    /**
+     * 收藏问题
+     * @param userId
+     * @param questionId
+     * @param targetStatus  0:取消收藏 1:收藏
+     * @return
+     */
+    @RequestMapping("/collect")
+    @ResponseBody
+    public Object collectQuestion(Integer userId, Integer questionId, Integer targetStatus){
+        RestResult result = new RestResult();
+        questionService.updateQuestionCollectedStatus(userId, questionId, targetStatus);
+        return result;
+    }
+
+    @RequestMapping("/questionDetailPage")
+    public String view2questionDetail(Model model, Integer questionId){
+        return "/discussion/question_detail";
     }
 }
