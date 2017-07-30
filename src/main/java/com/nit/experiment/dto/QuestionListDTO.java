@@ -17,23 +17,24 @@ public class QuestionListDTO {
     private Integer viewNo;
     private Integer thumbupNo;
     private Integer answerNo;
-    private Integer isCollected;
-    private Integer isThumbup;
+    private boolean collected;
+    private boolean thumbup;
 
-    public Integer getIsCollected() {
-        return isCollected;
+
+    public boolean isCollected() {
+        return collected;
     }
 
-    public void setIsCollected(Integer isCollected) {
-        this.isCollected = isCollected;
+    public void setCollected(boolean collected) {
+        this.collected = collected;
     }
 
-    public Integer getIsThumbup() {
-        return isThumbup;
+    public boolean isThumbup() {
+        return thumbup;
     }
 
-    public void setIsThumbup(Integer isThumbup) {
-        this.isThumbup = isThumbup;
+    public void setThumbup(boolean thumbup) {
+        this.thumbup = thumbup;
     }
 
     private Date createTime;

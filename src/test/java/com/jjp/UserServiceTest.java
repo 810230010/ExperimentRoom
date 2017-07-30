@@ -1,6 +1,7 @@
 package com.jjp;
 
 import com.github.pagehelper.PageInfo;
+import com.nit.experiment.dao.QuestionMapper;
 import com.nit.experiment.entity.User;
 import com.nit.experiment.service.QuestionService;
 import com.nit.experiment.service.UserService;
@@ -22,10 +23,10 @@ import java.util.List;
 public class UserServiceTest {
     private static Logger logger = Logger.getLogger(UserServiceTest.class);
     @Autowired
-    private QuestionService questionService;
+    private QuestionMapper questionMapper;
 
     @Test
     public void test1(){
-       logger.info(questionService.searchAllQuestions(1,5,"","question_id","asc").size());
+       logger.info(questionMapper.queryUserWithQuestionOperation(1, 2));
     }
 }

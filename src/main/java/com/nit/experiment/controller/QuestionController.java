@@ -3,8 +3,10 @@ package com.nit.experiment.controller;
 import com.nit.experiment.common.controller.PageResult;
 import com.nit.experiment.common.controller.RestResult;
 import com.nit.experiment.common.util.StringUtils;
+import com.nit.experiment.common.util.WebUtil;
 import com.nit.experiment.dto.QuestionListDTO;
 import com.nit.experiment.entity.Question;
+import com.nit.experiment.entity.User;
 import com.nit.experiment.service.QuestionService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
@@ -35,7 +38,7 @@ public class QuestionController {
     }
 
     /**
-     * 查询所有用户
+     * 查询所有问题
      * @param draw
      * @param searchKey
      * @param orderColumn
@@ -46,14 +49,15 @@ public class QuestionController {
      */
     @RequestMapping("/searchAllQuestions")
     @ResponseBody
-    public Object searchAllQuestions( @RequestParam("draw") int draw,
-                                  @RequestParam(value = "searchKey", required = false) String searchKey,
-                                  @RequestParam(value = "orderColumn", required = false) String orderColumn,
-                                  @RequestParam(value = "orderType", required = false) String orderType,
-                                  @RequestParam(value = "page", required = false, defaultValue = "1") Integer page,
-                                  @RequestParam(value = "pageSize", required = false, defaultValue = "10") Integer pageSize){
+    public Object searchAllQuestions(@RequestParam("draw") int draw,
+                                     @RequestParam(value = "searchKey", required = false) String searchKey,
+                                     @RequestParam(value = "orderColumn", required = false) String orderColumn,
+                                     @RequestParam(value = "orderType", required = false) String orderType,
+                                     @RequestParam(value = "page", required = false, defaultValue = "1") Integer page,
+                                     @RequestParam(value = "pageSize", required = false, defaultValue = "10") Integer pageSize,
+                                     HttpServletRequest request){
         orderColumn = StringUtils.camelToUnderline(orderColumn);
-        List<QuestionListDTO> questionList= questionService.searchAllQuestions(page, pageSize, searchKey, orderColumn, orderType);
+        List<QuestionListDTO> questionList= questionService.searchAllQuestions(page, pageSize, searchKey, orderColumn, orderType, request);
         return new PageResult<QuestionListDTO>(questionList, draw);
     }
 
@@ -67,6 +71,21 @@ public class QuestionController {
     public Object deleteOneQuestion(@PathVariable Integer questionId){
         RestResult result = new RestResult();
         int affectedRow = questionService.deleteQuestionByPrimaryKey(questionId);
+        return result;
+    }
+
+    /**
+     * 更改点赞状态
+     * @param userId
+     * @param questionId
+     * @param targetStatus
+     * @return
+     */
+    @RequestMapping("/thumbup")
+    @ResponseBody
+    public Object thumbup(Integer userId, Integer questionId, Integer targetStatus){
+        RestResult result = new RestResult();
+        int affectedRow = questionService.updateThumbupStatus(userId, questionId, targetStatus);
         return result;
     }
 }

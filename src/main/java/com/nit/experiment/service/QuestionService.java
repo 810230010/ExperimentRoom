@@ -3,6 +3,7 @@ package com.nit.experiment.service;
 import com.nit.experiment.dto.QuestionListDTO;
 import com.nit.experiment.entity.Question;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
@@ -18,7 +19,7 @@ public interface QuestionService {
       * @param orderType
       * @return
       */
-     List<QuestionListDTO> searchAllQuestions(int page, int pageSize, String searchKey, String orderColumn, String orderType);
+     List<QuestionListDTO> searchAllQuestions(int page, int pageSize, String searchKey, String orderColumn, String orderType, HttpServletRequest request);
 
      /**
       * 删除某个问题
@@ -26,4 +27,15 @@ public interface QuestionService {
       * @return
       */
      int deleteQuestionByPrimaryKey(Integer questionId);
+
+     /**
+      * 更新点赞状态
+      * @param userId
+      * @param questionId
+      * @param targetStatus
+      * @return
+      */
+     int updateThumbupStatus(Integer userId, Integer questionId, Integer targetStatus);
+
+
 }

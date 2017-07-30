@@ -67,20 +67,22 @@
                 {"data":"viewNo","width": "5%","title":"浏览数","orderable": true},
                 {"data":"thumbupNo","width": "5%","title":"点赞数","orderable": true},
                 {"data":"answerNo","width": "5%","title":"回复数","orderable": true},
+                {"data":"thumbup","width": "5%","title":"是否点赞","visible": false},
+                {"data":"collected","width": "5%","title":"是否收藏","visible": false},
                 {
                     "data":"questionId",
                     "width": "15%",
                     "title":"操作",
                     "orderable": false,
                     "render": function (data, type, row) {
+                        var thumbup = row.thumbup == false?'<a class="col-sm-3 table-button btn btn-success btn-xs table-action thumbup" href="javascript:void(0)">点赞 <i class="fa fa-thumbs-up"></i></a>':'<a class="col-sm-3 table-button btn btn-success btn-xs table-action thumbup" href="javascript:void(0)">已点赞 <i class="fa fa-thumbs-up"></i></a>';
+                        var collected = row.collected == false?'<a class="col-sm-3 table-button btn btn-info btn-xs table-action collect" href="javascript:void(0)">收藏 <i class="fa fa-folder"></i> </a>':'<a class="col-sm-3 table-button btn btn-info btn-xs table-action collect" href="javascript:void(0)">已收藏 <i class="fa fa-folder"></i> </a>'
                         if('$currentUser.userType' == 'ADMIN' || '$currentUser.userType' == "TEACHER"){
                             return [
                                 '<a class="col-sm-3 btn btn-danger btn-xs table-action delete" href="javascript:void(0)">',
                                 '删除 <i class="fa fa-trash-o"></i>',
                                 '</a>',
-                                '<a class="col-sm-3 table-button btn btn-success btn-xs table-action thumbup" href="javascript:void(0)">',
-                                '点赞 <i class="fa fa-thumbs-up"></i>',
-                                '</a>',
+                                thumbup,
                                 '<a class="col-sm-3 table-button btn btn-info btn-xs table-action collect" href="javascript:void(0)">',
                                 '收藏 <i class="fa fa-folder"></i>',
                                 '</a>',
@@ -155,16 +157,20 @@
         table.on( 'click', '.thumbup', function () {
             var tr = $(this).closest('tr');
             var data = table.row(tr).data();
+            var targetStatus = data.thumbup == true?0:1;
                 $.ajax({
-                    url: "/question/thumbup/",
-                    data: {"userId": $currentUser.userId, "questionId": data.questionId},
+                    url: "/question/thumbup",
+                    data: {"userId": $currentUser.userId, "questionId": data.questionId, "targetStatus":targetStatus},
                     success: function (result) {
                         if (result.code == 200) {
                             //提示层
-                            layer.msg('点赞成功!');
+                            if(targetStatus == 0) layer.msg('取消点赞!');
+                            else layer.msg('已点赞!');
+                            //重新载入
                             setTimeout(function () {
-                                table.ajax().reload;
-                            },2000);
+                                window.location.reload();
+                            },2000)
+
                         }
                     },
                     error: function (result) {
