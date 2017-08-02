@@ -1,5 +1,8 @@
 package com.nit.experiment.entity;
 
+import com.nit.experiment.common.util.JsonDateUtil;
+import org.codehaus.jackson.map.annotate.JsonSerialize;
+
 import java.util.Date;
 
 public class Answer {
@@ -11,13 +14,13 @@ public class Answer {
 
     private Integer userId;
 
-    private String content;
+    private String answerer;
 
-    private String replyIds;
+    private String answerContent;
 
     private Boolean isAccept;
 
-    private Date createTime;
+    private Date answerTime;
 
     public Integer getAnswerId() {
         return answerId;
@@ -51,20 +54,20 @@ public class Answer {
         this.userId = userId;
     }
 
-    public String getContent() {
-        return content;
+    public String getAnswerer() {
+        return answerer;
     }
 
-    public void setContent(String content) {
-        this.content = content == null ? null : content.trim();
+    public void setAnswerer(String answerer) {
+        this.answerer = answerer == null ? null : answerer.trim();
     }
 
-    public String getReplyIds() {
-        return replyIds;
+    public String getAnswerContent() {
+        return answerContent;
     }
 
-    public void setReplyIds(String replyIds) {
-        this.replyIds = replyIds == null ? null : replyIds.trim();
+    public void setAnswerContent(String answerContent) {
+        this.answerContent = answerContent == null ? null : answerContent.trim();
     }
 
     public Boolean getIsAccept() {
@@ -74,12 +77,12 @@ public class Answer {
     public void setIsAccept(Boolean isAccept) {
         this.isAccept = isAccept;
     }
-
-    public Date getCreateTime() {
-        return createTime;
+    @JsonSerialize(using=JsonDateUtil.JsonDateSerializer.class)
+    public Date getAnswerTime() {
+        return answerTime;
     }
 
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
+    public void setAnswerTime(Date answerTime) {
+        this.answerTime = answerTime;
     }
 }

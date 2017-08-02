@@ -1,9 +1,11 @@
 package com.nit.experiment.dto;
 
 import com.nit.experiment.common.util.JsonDateUtil;
+import com.nit.experiment.entity.Answer;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by 江建平 on 2017/7/30.
@@ -15,6 +17,15 @@ public class QuestionDetailDTO {
     private String category;
     private String userName;
     private Date createTime;
+    private List<AnswerDTO> answer;
+
+    public List<AnswerDTO> getAnswer() {
+        return answer;
+    }
+
+    public void setAnswer(List<AnswerDTO> answer) {
+        this.answer = answer;
+    }
 
     public Integer getQuestionId() {
         return questionId;

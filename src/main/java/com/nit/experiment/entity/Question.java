@@ -13,6 +13,8 @@ public class Question {
 
     private Integer userId;
 
+    private String userName;
+
     private Integer viewNo;
 
     private Integer thumbupNo;
@@ -59,6 +61,14 @@ public class Question {
 
     public void setUserId(Integer userId) {
         this.userId = userId;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName == null ? null : userName.trim();
     }
 
     public Integer getViewNo() {

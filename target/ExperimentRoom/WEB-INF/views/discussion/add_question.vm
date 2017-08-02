@@ -1,0 +1,183 @@
+#parse("/common/begin.vm")
+<!--富文本编辑-->
+<link rel="stylesheet" type="text/css" href="/static/assets/wangeditor/wangEditor.min.css" />
+<!--select2-->
+<link rel="stylesheet" type="text/css" href="/static/css/plugins/select2/select2.min.css" />
+#parse("/common/header.vm")
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>添加问题</h2>
+    </div>
+</div>
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox">
+                <div class="ibox-title">
+                    <h5 id="rank"> </h5>
+                    <a id="back" hidden="hidden"> <i class="fa fa-reply" style="color: #777777"></i></a>
+                </div>
+                <div class="ibox-content">
+                    <form class="form-horizontal" id="form">
+                        <div class="form-group">
+                            <label for="title" class="col-sm-3 control-label">标题:</label>
+                            <div class="col-sm-7">
+                                <input id="title" type="text" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">标签:</label>
+                            <div class="col-sm-7">
+                                <select id="tag" class="col-lg-12">
+                                    <option>Java</option>
+                                    <option>Android</option>
+                                    <option>算法</option>
+                                    <option>C</option>
+                                    <option>C++</option>
+                                    <option>iOS</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">内容</label>
+                            <div class="col-sm-7">
+                                <textarea id="questionContent" style="height:400px">
+
+                                </textarea>
+                            </div>
+                        </div>
+
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <div class="text-center">
+                                <input id="submit" type="submit" class="btn btn-success" value="提交"/>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+#parse("/common/footer.vm")
+<!--wangeitor-->
+<script type="text/javascript" src="/static/assets/wangeditor/wangEditor.min.js"></script>
+<!--七牛云-->
+<script type="text/javascript" src="/static/js/plugins/plupload/plupload.full.min.js"></script>
+<script type="text/javascript" src="/static/js/plugins/plupload/zh_CN.js"></script>
+<script type="text/javascript" src="/static/js/qiniu.js"></script>
+<!--select2-->
+<script type="text/javascript" src="/static/js/plugins/select2/select2.full.min.js"></script>
+
+<!--jquery validator-->
+<script type="text/javascript" src="/static/js/plugins/validate/jquery.validate.min.js"></script>
+<script type="text/javascript" src="/static/js/plugins/validate/messages_zh.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#tag").select2();
+        // 封装 console.log 函数
+        function printLog(title, info) {
+            window.console && console.log(title, info);
+        }
+
+        // 初始化七牛上传
+        function uploadInit() {
+            // this 即 editor 对象
+            var editor = this;
+            // 触发选择文件的按钮的id
+            var btnId = editor.customUploadBtnId;
+            // 触发选择文件的按钮的父容器的id
+            var containerId = editor.customUploadContainerId;
+
+            // 创建上传对象
+            var uploader = Qiniu.uploader({
+                runtimes: 'html5,flash,html4',    //上传模式,依次退化
+                browse_button: btnId,       //上传选择的点选按钮，**必需**
+                uptoken : '$uploadToken',
+                domain: '$domain',
+                container: containerId,           //上传区域DOM ID，默认是browser_button的父元素，
+                max_file_size: '100mb',           //最大文件体积限制
+                flash_swf_url: '../js/plupload/Moxie.swf',  //引入flash,相对路径
+                filters: {
+                    mime_types: [
+                        //只允许上传图片文件 （注意，extensions中，逗号后面不要加空格）
+                        { title: "图片文件", extensions: "jpg,jpeg,gif,png,bmp" }
+                    ]
+                },
+                max_retries: 3,                   //上传失败最大重试次数
+                dragdrop: true,                   //开启可拖曳上传
+                drop_element: 'editor-container',        //拖曳上传区域元素的ID，拖曳文件或文件夹后可触发上传
+                chunk_size: '4mb',                //分块上传时，每片的体积
+                auto_start: true,                 //选择文件后自动上传，若关闭需要自己绑定事件触发上传
+                init: {
+                    'FilesAdded': function(up, files) {
+                        plupload.each(files, function(file) {
+                            // 文件添加进队列后,处理相关的事情
+                            printLog('on FilesAdded');
+                        });
+                    },
+                    'BeforeUpload': function(up, file) {
+                        // 每个文件上传前,处理相关的事情
+                        printLog('on BeforeUpload');
+                    },
+                    'UploadProgress': function(up, file) {
+                        // 显示进度条
+                        editor.showUploadProgress(file.percent);
+                    },
+                    'FileUploaded': function(up, file, info) {
+                        printLog(info)
+                        var domain = up.getOption('domain');
+                        var res = $.parseJSON(info);
+                        printLog(res.key);
+                        var sourceLink = domain + res.key; //获取上传成功后的文件的Url
+                        printLog(sourceLink);
+
+                        editor.command(null, 'insertHtml', '<img src="' + sourceLink + '" style="max-width:100%;"/>')
+                    },
+                    'Error': function(up, err, errTip) {
+                        printLog('on Error');
+                    },
+                    'UploadComplete': function() {
+                        printLog('on UploadComplete');
+                        // 隐藏进度条
+                        editor.hideUploadProgress();
+                    }
+                }
+            });
+        }
+
+        var editor = new wangEditor('questionContent');
+        editor.config.customUpload = true;  // 设置自定义上传的开关
+        editor.config.customUploadInit = uploadInit;  // 配置自定义上传初始化事件，uploadInit方法在上面定义了
+        editor.create();
+    });
+    $("#form").validate({
+        submitHandler:function(form){
+            var category = $("#tag").val();
+            var title = $("#title").val();
+            var questionContent = $("#questionContent").val();
+            $.ajax({
+                url: "/question/addQuestion",
+                data: {"title": title, "category": category, "content": questionContent, "userId": $currentUser.userId, "userName": '$currentUser.userName'},
+                success: function(result){
+                    if(result.code == 200){
+                        swal("成功！", "您的问题已发布。", "success");
+                        setTimeout(function () {
+                            window.location.href = "/question/questionListPage";
+                        },2000)
+                    }
+                },
+                error: function(result){
+                    alert("系统出错")
+                }
+            })
+        },
+        invalidHandler: function(form, validator) {return false;}
+    });
+
+</script>
+
+#parse("/common/end.vm")

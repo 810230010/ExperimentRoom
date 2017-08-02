@@ -1,5 +1,7 @@
 #parse("/common/begin.vm")
 <link href="/static/css/animate/animate.css" rel="stylesheet">
+<!--富文本编辑-->
+<link rel="stylesheet" type="text/css" href="/static/assets/wangeditor/wangEditor.min.css" />
 #parse("/common/header.vm")
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-10">
@@ -11,7 +13,7 @@
         <div class="col-lg-12">
             <div class="ibox">
                 <div class="ibox-title">
-                    <h2 class="text-center" id="rank"><b>java基本数据类型</b>(<font style="font-size: 16px;">created by <span style="color: #07C">Usher</span></font>)</h2>
+                    <h2 class="text-center" id="rank"><b>$question.title</b>(<font style="font-size: 16px;">created by <span style="color: #07C">$question.userName</span> on $!date.format('yyyy-MM-dd HH:mm:ss ',$!question.createTime)</font>)</h2>
                     <a id="back" hidden="hidden"> <i class="fa fa-reply" style="color: #777777"></i></a>
                 </div>
                 <div class="ibox-content">
@@ -19,14 +21,14 @@
                         <div class="form-group">
                             <label class="col-sm-3 control-label">标签:</label>
                             <div class="col-sm-7">
-                                <a href="#" class="btn btn-success disabled">Java</a>
+                                <a href="#" class="btn btn-success disabled">$question.category</a>
                             </div>
                         </div>
                         <div class="hr-line-dashed"></div>
                         <div class="form-group">
                             <label class="col-sm-3 control-label">问题内容:</label>
                             <div class="col-sm-7" style="height:300px;">
-
+                                  $!question.content
                             </div>
                         </div>
                         <div class="hr-line-dashed"></div>
@@ -48,88 +50,97 @@
             <div class="ibox">
                 <div class="ibox-title">
                 </div>
+                #foreach($answerItem in $question.answer)
                 <div class="ibox-content">
-                    <form class="form-horizontal question-content">
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label"><span class="fa fa-check fa-3x"></span></label>
-                            <div class="col-sm-7">
-                                <div class="social-feed-box">
-
-                                    <div class="pull-right social-action dropdown">
-                                        <button data-toggle="dropdown" class="dropdown-toggle btn-white">
-                                            <i class="fa fa-angle-down"></i>
-                                        </button>
-                                        <ul class="dropdown-menu m-t-xs">
-                                            <li><a href="social_feed.html#">Config</a></li>
-                                        </ul>
-                                    </div>
-                                    <div class="social-avatar">
-                                        <a href="" class="pull-left">
-                                            <img alt="image" src="/static/img/a4.jpg">
-                                        </a>
-                                        <div class="media-body">
-                                            <a href="social_feed.html#">
-                                                Andrew Williams
-                                            </a>
-                                            <small class="text-muted">Today 4:21 pm - 12.06.2014</small>
+                        <form class="form-horizontal" onsubmit="return false">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">
+                                    #if($answerItem.accept == true)
+                                        <span class="fa fa-check fa-3x"></span>
+                                    #end
+                                </label>
+                                <div class="col-sm-7">
+                                    <div class="social-feed-box">
+                                        <div class="pull-right social-action dropdown">
+                                            <button data-toggle="dropdown" class="dropdown-toggle btn-white">
+                                                <i class="fa fa-angle-down"></i>
+                                            </button>
+                                            <ul class="dropdown-menu m-t-xs">
+                                                <li><a href="social_feed.html#">Config</a></li>
+                                            </ul>
                                         </div>
-                                    </div>
-                                    <div class="social-body">
-                                        <p>
-                                            Many desktop publishing packages and web page editors now use Lorem Ipsum as their
-                                            default model text, and a search for 'lorem ipsum' will uncover many web sites still
-                                            in their infancy. Packages and web page editors now use Lorem Ipsum as their
-                                            default model text.
-                                        </p>
-
-
-                                    </div>
-                                    <div class="social-footer">
-                                        <div class="social-comment">
+                                        <div class="social-avatar">
                                             <a href="" class="pull-left">
                                                 <img alt="image" src="/static/img/a4.jpg">
                                             </a>
                                             <div class="media-body">
                                                 <a href="social_feed.html#">
-                                                    Andrew Williams
+                                                    $answerItem.answerer
                                                 </a>
-                                                Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words.
-                                                <br/>
-
+                                                <small class="text-muted">$!date.format('yyyy-MM-dd HH:mm:ss ',$!answerItem.answerTime)</small>
                                             </div>
                                         </div>
-
-                                        <div class="social-comment">
-                                            <a href="" class="pull-left">
-                                                <img alt="image" src="/static/img/a4.jpg">
-                                            </a>
-                                            <div class="media-body">
-                                                <a href="social_feed.html#">
-                                                    Andrew Williams
-                                                </a>
-                                                Making this the first true generator on the Internet. It uses a dictionary of.
-                                                <br/>
-                                            </div>
+                                        <div class="social-body">
+                                            <p>
+                                                $!answerItem.answerContent
+                                            </p>
                                         </div>
 
-                                        <div class="social-comment">
-                                            <a href="" class="pull-left">
-                                                <img alt="image" src="/static/img/a4.jpg">
-                                            </a>
-                                            <div class="media-body">
-                                                <textarea class="form-control" placeholder="Write comment..."></textarea>
+                                        <div class="social-footer">
+                                            #foreach($replyItem in $answerItem.answerReply)
+                                                <div class="social-comment">
+                                                    <a href="" class="pull-left">
+                                                        <img alt="image" src="/static/img/a4.jpg">
+                                                    </a>
+                                                    <div class="media-body">
+                                                        <a href="social_feed.html#">
+                                                            #set($saySym=":")
+                                                            $replyItem.answerer$saySym
+                                                        </a>
+                                                        $replyItem.answerContent
+                                                        <br/>
+                                                        <small class="text-muted">$!date.format('yyyy-MM-dd HH:mm:ss ',$!replyItem.answerTime)</small>
+                                                    </div>
+                                                </div>
+                                            #end
+                                            <div class="social-comment">
+                                                <a href="" class="pull-left">
+                                                    <img alt="image" src="/static/img/a4.jpg">
+                                                </a>
+                                                <div class="media-body">
+                                                    <div class="pull-left col-lg-11">
+                                                        <textarea id="$answerItem.answerId" class="form-control pull-left replyContent" placeholder="发表评论..."></textarea>
+                                                    </div>
+                                                    <div class="pull-right">
+                                                        <button class="btn btn-success" id="publish" onclick="publishReply('$answerItem.answerId')">发表</button>
+                                                    </div>
+                                                </div>
                                             </div>
+
                                         </div>
 
                                     </div>
-
                                 </div>
                             </div>
-                        </div>
-                        <div class="hr-line-dashed"></div>
-                    </form>
+                        </form>
                 </div>
+                    <div style="border: 1px dashed silver;"></div>
+                #end
             </div>
+
+            <div class="ibox">
+                <div class="ibox-title">
+                    <h3>我有想法...</h3>
+                </div>
+                    <div class="ibox-content">
+                        <div id="div1" style="height:400px;width: 400px">
+
+                        </div>
+                    </div>
+                <input id="submit" type="button" class="btn btn-success col-lg-12" value="提交回答" style="font-size: 20px">
+                    <div style="border: 1px dashed silver;"></div>
+            </div>
+
         </div>
     </div>
 </div>
@@ -137,9 +148,132 @@
 
 <!-- blueimp gallery -->
 <script src="/static/js/plugins/blueimp/jquery.blueimp-gallery.min.js"></script>
+<!--wangeitor-->
+<script type="text/javascript" src="/static/assets/wangeditor/wangEditor.min.js"></script>
+<!--七牛云-->
+<script type="text/javascript" src="/static/js/plugins/plupload/plupload.full.min.js"></script>
+<script type="text/javascript" src="/static/js/plugins/plupload/zh_CN.js"></script>
+<script type="text/javascript" src="/static/js/qiniu.js"></script>
+<!--layer-->
+<script src="/static/js/plugins/layer/layer.js"></script>
 
 <script>
+    $(document).ready(function () {
+        // 封装 console.log 函数
+        function printLog(title, info) {
+            window.console && console.log(title, info);
+        }
 
+        // 初始化七牛上传
+        function uploadInit() {
+            // this 即 editor 对象
+            var editor = this;
+            // 触发选择文件的按钮的id
+            var btnId = editor.customUploadBtnId;
+            // 触发选择文件的按钮的父容器的id
+            var containerId = editor.customUploadContainerId;
+
+            // 创建上传对象
+            var uploader = Qiniu.uploader({
+                runtimes: 'html5,flash,html4',    //上传模式,依次退化
+                browse_button: btnId,       //上传选择的点选按钮，**必需**
+                uptoken : '$uploadToken',
+                domain: '$domain',
+                container: containerId,           //上传区域DOM ID，默认是browser_button的父元素，
+                max_file_size: '100mb',           //最大文件体积限制
+                flash_swf_url: '../js/plupload/Moxie.swf',  //引入flash,相对路径
+                filters: {
+                    mime_types: [
+                        //只允许上传图片文件 （注意，extensions中，逗号后面不要加空格）
+                        { title: "图片文件", extensions: "jpg,jpeg,gif,png,bmp" }
+                    ]
+                },
+                max_retries: 3,                   //上传失败最大重试次数
+                dragdrop: true,                   //开启可拖曳上传
+                drop_element: 'editor-container',        //拖曳上传区域元素的ID，拖曳文件或文件夹后可触发上传
+                chunk_size: '4mb',                //分块上传时，每片的体积
+                auto_start: true,                 //选择文件后自动上传，若关闭需要自己绑定事件触发上传
+                init: {
+                    'FilesAdded': function(up, files) {
+                        plupload.each(files, function(file) {
+                            // 文件添加进队列后,处理相关的事情
+                            printLog('on FilesAdded');
+                        });
+                    },
+                    'BeforeUpload': function(up, file) {
+                        // 每个文件上传前,处理相关的事情
+                        printLog('on BeforeUpload');
+                    },
+                    'UploadProgress': function(up, file) {
+                        // 显示进度条
+                        editor.showUploadProgress(file.percent);
+                    },
+                    'FileUploaded': function(up, file, info) {
+                        printLog(info)
+                        var domain = up.getOption('domain');
+                        var res = $.parseJSON(info);
+                        printLog(res.key);
+                        var sourceLink = domain + res.key; //获取上传成功后的文件的Url
+                        printLog(sourceLink);
+
+                        editor.command(null, 'insertHtml', '<img src="' + sourceLink + '" style="max-width:100%;"/>')
+                    },
+                    'Error': function(up, err, errTip) {
+                        printLog('on Error');
+                    },
+                    'UploadComplete': function() {
+                        printLog('on UploadComplete');
+                        // 隐藏进度条
+                        editor.hideUploadProgress();
+                    }
+                }
+            });
+        }
+
+        var editor = new wangEditor('div1');
+        editor.config.customUpload = true;  // 设置自定义上传的开关
+        editor.config.customUploadInit = uploadInit;  // 配置自定义上传初始化事件，uploadInit方法在上面定义了
+        editor.create();
+    });
+
+    //点击提交回答
+    $("#submit").click(function () {
+        var answerContent = $("#div1").html();
+        $.ajax({
+            url: "/answer/answerQuestion",
+            data: {"answerContent": answerContent, "questionId": $question.questionId},
+            success: function(result){
+                if(result.code == 200){
+                    swal("成功发布！", "您的回答已发表。", "success");
+                    setTimeout(function () {
+                        window.location.reload();
+                    },2000)
+                }
+            },
+            error: function(result){
+                alert("系统出错")
+            }
+        })
+    })
+    //发表回答的回复
+    function publishReply(k) {
+        var replyContent = $("#"+k).val();
+        $.ajax({
+            url: "/answer/answerReply",
+            data: {"parentId": k, "replyContent": replyContent, "userId": $currentUser.userId, "answerer": '$currentUser.userName',"questionId": $question.questionId},
+            success: function (result) {
+                if(result.code == 200){
+                    layer.msg('已回复!')
+                    setTimeout(function () {
+                        window.location.reload();
+                    },2000)
+                }
+            },
+            error: function(result){
+                alert("系统出错")
+            }
+        })
+    }
 </script>
 
 #parse("/common/end.vm")

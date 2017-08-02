@@ -1,6 +1,23 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.nit.experiment.dao.QuestionMapper" >
+  <resultMap id="questionDetailResult" type="com.nit.experiment.dto.QuestionDetailDTO">
+    <id property="questionId" column="question_id"/>
+    <result property="category" column="category"/>
+    <result property="content" column="content"/>
+    <result property="createTime" column="create_time"/>
+    <result property="title" column="title"/>
+    <result property="userName" column="user_name"/>
+    <collection property="answer" ofType="com.nit.experiment.dto.AnswerDTO">
+      <id property="answerId" column="answer_id"/>
+      <result property="answerContent" column="answer_content"/>
+      <result property="parentId" column="parent_id"/>
+      <result property="questionId" column="question_id"/>
+      <result property="answerer" column="answerer"/>
+      <result property="answerTime" column="answer_time"/>
+      <result property="isAccept" column="is_accept"/>
+    </collection>
+  </resultMap>
   <!--插入记录到t_user_question-->
   <insert id="insertUserQuestion">
     insert into t_user_question(question_id, user_id) values (#{questionId}, #{userId})
@@ -21,6 +38,7 @@
       update t_user_question set is_collected = #{targetStatus}
       where user_id = #{userId} and question_id = #{questionId}
   </update>
+
   <!--条件查询所有问题-->
   <select id="selectAllQuestions" resultType="com.nit.experiment.dto.QuestionListDTO">
     select a.question_id, a.title, a.content, a.category, a.view_no, a.thumbup_no, a.answer_no, a.create_time, b.user_name from t_question a, t_user b
@@ -43,5 +61,16 @@
     select is_thumbup as thumbup,is_collected as collected from t_user_question
     where user_id = #{userId} and question_id = #{questionId}
   </select>
-
+  <!--查询问题详情-->
+  <select id="getQuestionDetail" resultMap="questionDetailResult">
+    select a.question_id, a.title, a.content, a.category, a.user_name, a.create_time, b.answer_id, b.parent_id, b.answerer, b.answer_content, b.is_accept, b.answer_time from t_question a left join t_answer b
+    on a.question_id = b.question_id
+    where a.question_id = #{questionId}
+  </select>
+  <!--更改问题统计情况-->
+  <update id="updateQuestionStatistic">
+    update t_question
+    set #{field} = #{field} + #{num}
+    where user_id = #{userId} and question_id = #{questionId}
+  </update>
 </mapper>

@@ -7,13 +7,15 @@
     <result column="content" property="content" jdbcType="VARCHAR" />
     <result column="category" property="category" jdbcType="VARCHAR" />
     <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="user_name" property="userName" jdbcType="VARCHAR" />
     <result column="view_no" property="viewNo" jdbcType="INTEGER" />
     <result column="thumbup_no" property="thumbupNo" jdbcType="INTEGER" />
     <result column="answer_no" property="answerNo" jdbcType="INTEGER" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Base_Column_List" >
-    question_id, title, content, category, user_id, view_no, thumbup_no, answer_no, create_time
+    question_id, title, content, category, user_id, user_name, view_no, thumbup_no, answer_no, 
+    create_time
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -27,13 +29,13 @@
   </delete>
   <insert id="insert" parameterType="com.nit.experiment.entity.Question" >
     insert into t_question (question_id, title, content, 
-      category, user_id, view_no, 
-      thumbup_no, answer_no, create_time
-      )
+      category, user_id, user_name, 
+      view_no, thumbup_no, answer_no, 
+      create_time)
     values (#{questionId,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, 
-      #{category,jdbcType=VARCHAR}, #{userId,jdbcType=INTEGER}, #{viewNo,jdbcType=INTEGER}, 
-      #{thumbupNo,jdbcType=INTEGER}, #{answerNo,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}
-      )
+      #{category,jdbcType=VARCHAR}, #{userId,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, 
+      #{viewNo,jdbcType=INTEGER}, #{thumbupNo,jdbcType=INTEGER}, #{answerNo,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.nit.experiment.entity.Question" >
     insert into t_question
@@ -52,6 +54,9 @@
       </if>
       <if test="userId != null" >
         user_id,
+      </if>
+      <if test="userName != null" >
+        user_name,
       </if>
       <if test="viewNo != null" >
         view_no,
@@ -82,6 +87,9 @@
       <if test="userId != null" >
         #{userId,jdbcType=INTEGER},
       </if>
+      <if test="userName != null" >
+        #{userName,jdbcType=VARCHAR},
+      </if>
       <if test="viewNo != null" >
         #{viewNo,jdbcType=INTEGER},
       </if>
@@ -111,6 +119,9 @@
       <if test="userId != null" >
         user_id = #{userId,jdbcType=INTEGER},
       </if>
+      <if test="userName != null" >
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
       <if test="viewNo != null" >
         view_no = #{viewNo,jdbcType=INTEGER},
       </if>
@@ -132,6 +143,7 @@
       content = #{content,jdbcType=VARCHAR},
       category = #{category,jdbcType=VARCHAR},
       user_id = #{userId,jdbcType=INTEGER},
+      user_name = #{userName,jdbcType=VARCHAR},
       view_no = #{viewNo,jdbcType=INTEGER},
       thumbup_no = #{thumbupNo,jdbcType=INTEGER},
       answer_no = #{answerNo,jdbcType=INTEGER},

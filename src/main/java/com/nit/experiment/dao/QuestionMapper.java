@@ -1,6 +1,7 @@
 package com.nit.experiment.dao;
 
 import com.nit.experiment.common.dao.BaseMapper;
+import com.nit.experiment.dto.QuestionDetailDTO;
 import com.nit.experiment.dto.QuestionListDTO;
 import com.nit.experiment.entity.Question;
 import org.apache.ibatis.annotations.Param;
@@ -66,5 +67,18 @@ public interface QuestionMapper extends BaseMapper<Question, Integer>{
      */
     int updateQuestionCollectedStatus(@Param("userId") Integer userId, @Param("questionId") Integer questionId, @Param("targetStatus") Integer targetStatus);
 
+    /**
+     * 查询问题的所有信息 包括回答
+     * @param questionId
+     * @return
+     */
+    QuestionDetailDTO getQuestionDetail(@Param("questionId") Integer questionId);
 
+    /**
+     * 更改问题的统计信息(点赞数、浏览数等)
+     * @param field
+     * @param num
+     * @return
+     */
+    int updateQuestionStatistic(@Param("field") String field, @Param("num") int num, @Param("userId") Integer userId, @Param("questionId") Integer questionId);
 }

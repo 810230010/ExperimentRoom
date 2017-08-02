@@ -2,6 +2,7 @@ package com.nit.experiment.controller;
 
 import com.nit.experiment.common.controller.PageResult;
 import com.nit.experiment.common.controller.RestResult;
+import com.nit.experiment.common.qiniu.QiniuUtil;
 import com.nit.experiment.common.util.StringUtils;
 import com.nit.experiment.common.util.WebUtil;
 import com.nit.experiment.dto.QuestionListDTO;
@@ -105,8 +106,37 @@ public class QuestionController {
         return result;
     }
 
+    /**
+     * 问题详情页面
+     * @param model
+     * @param questionId
+     * @return
+     */
     @RequestMapping("/questionDetailPage")
     public String view2questionDetail(Model model, Integer questionId){
+        model.addAttribute("question", questionService.getQuestionDetailWithReply(questionId));
+        model.addAttribute("uploadToken", QiniuUtil.getUploadToken());
+        model.addAttribute("domain", QiniuUtil.getBaseUrl());
         return "/discussion/question_detail";
+    }
+
+    /**
+     * 跳转到添加问题页面
+     * @param model
+     * @return
+     */
+    @RequestMapping("/addQuestionPage")
+    public String view2addQuestion(Model model){
+        model.addAttribute("uploadToken", QiniuUtil.getUploadToken());
+        model.addAttribute("domain", QiniuUtil.getBaseUrl());
+        return "discussion/add_question";
+    }
+
+    @RequestMapping("/addQuestion")
+    @ResponseBody
+    public Object addQuestion(Question question){
+        RestResult result = new RestResult();
+        int affectedRow = questionService.addQuestion(question);
+        return result;
     }
 }

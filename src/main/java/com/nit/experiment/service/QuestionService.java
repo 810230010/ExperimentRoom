@@ -1,7 +1,9 @@
 package com.nit.experiment.service;
 
+import com.nit.experiment.dto.QuestionDetailDTO;
 import com.nit.experiment.dto.QuestionListDTO;
 import com.nit.experiment.entity.Question;
+import org.apache.ibatis.annotations.Param;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -37,6 +39,27 @@ public interface QuestionService {
       */
      int updateThumbupStatus(Integer userId, Integer questionId, Integer targetStatus);
 
+     /**
+      * 更改收藏状态
+      * @param userId
+      * @param questionId
+      * @param targetStatus
+      * @return
+      */
      int updateQuestionCollectedStatus(Integer userId, Integer questionId, Integer targetStatus);
 
+
+     /**
+      * 查询问题的详细信息
+      * @param questionId
+      * @return
+      */
+     QuestionDetailDTO getQuestionDetailWithReply(Integer questionId);
+
+     /**
+      * 添加问题
+      * @param question
+      * @return
+      */
+     int addQuestion(Question question);
 }
