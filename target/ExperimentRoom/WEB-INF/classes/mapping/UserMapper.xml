@@ -21,6 +21,11 @@
     update t_user set user_type = #{role}
     where user_id = #{userId}
   </update>
+  <!--修改密码-->
+  <update id="updatePassword">
+    update t_user set password = #{password}
+    where user_id = #{userId}
+  </update>
 
   <!--根据用户名和密码查询-->
   <select id="queryUserByUsernameAndPassword" resultType="com.nit.experiment.entity.User">

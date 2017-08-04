@@ -68,9 +68,9 @@
     where a.question_id = #{questionId}
   </select>
   <!--更改问题统计情况-->
-  <update id="updateQuestionStatistic">
+  <update id="updateQuestionThumbupStatistic">
     update t_question
-    set #{field} = #{field} + #{num}
+    set thumbup_no = thumbup_no + #{num}
     where user_id = #{userId} and question_id = #{questionId}
   </update>
 </mapper>

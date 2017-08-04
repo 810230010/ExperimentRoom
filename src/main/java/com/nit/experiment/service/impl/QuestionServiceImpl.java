@@ -50,9 +50,9 @@ public class QuestionServiceImpl implements QuestionService {
     public int updateThumbupStatus(Integer userId, Integer questionId, Integer targetStatus) {
         //如果点赞 +1
         if(targetStatus == 1){
-            questionMapper.updateQuestionStatistic("thumbup_no", 1, userId, questionId);
+            questionMapper.updateQuestionThumbupStatistic(1, userId, questionId);
         }else{
-            questionMapper.updateQuestionStatistic("thumbup_no", -1, userId, questionId);
+            questionMapper.updateQuestionThumbupStatistic(-1, userId, questionId);
         }
         int result = questionMapper.existenceOfUserQuestion(userId, questionId);
         //如果result=1说明该记录已存在，只需更新,否则先插入在更新

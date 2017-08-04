@@ -121,34 +121,34 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.nit.experiment.entity.User" >
     update t_user
     <set >
-      <if test="userName != null" >
+      <if test="userName != null and userName != '' ">
         user_name = #{userName,jdbcType=VARCHAR},
       </if>
-      <if test="stuNo != null" >
+      <if test="stuNo != null and stuNo != ''">
         stu_no = #{stuNo,jdbcType=VARCHAR},
       </if>
-      <if test="className != null" >
+      <if test="className != null and className != ''" >
         class_name = #{className,jdbcType=VARCHAR},
       </if>
-      <if test="password != null" >
+      <if test="password != null and password != ''" >
         password = #{password,jdbcType=VARCHAR},
       </if>
-      <if test="userType != null" >
+      <if test="userType != null and userType != ''" >
         user_type = #{userType,jdbcType=VARCHAR},
       </if>
-      <if test="sex != null" >
+      <if test="sex != null and sex != ''" >
         sex = #{sex,jdbcType=CHAR},
       </if>
-      <if test="phone != null" >
+      <if test="phone != null and phone != ''" >
         phone = #{phone,jdbcType=VARCHAR},
       </if>
-      <if test="email != null" >
+      <if test="email != null and email != ''" >
         email = #{email,jdbcType=VARCHAR},
       </if>
-      <if test="qq != null" >
+      <if test="qq != null and qq != ''" >
         qq = #{qq,jdbcType=VARCHAR},
       </if>
-      <if test="curriculum != null" >
+      <if test="curriculum != null and curriculum != ''" >
         curriculum = #{curriculum,jdbcType=VARCHAR},
       </if>
       <if test="createTime != null" >

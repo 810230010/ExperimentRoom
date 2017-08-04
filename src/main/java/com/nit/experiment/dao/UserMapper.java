@@ -38,4 +38,12 @@ public interface UserMapper extends BaseMapper<User, Integer> {
      * @return
      */
     int addMemberByExcel(List<User> list);
+
+    /**
+     * 修改密码
+     * @param userId
+     * @param password
+     * @return
+     */
+    int updatePassword(@Param("userId") Integer userId, @Param("password") String password);
 }

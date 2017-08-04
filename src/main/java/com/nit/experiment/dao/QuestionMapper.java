@@ -75,10 +75,9 @@ public interface QuestionMapper extends BaseMapper<Question, Integer>{
     QuestionDetailDTO getQuestionDetail(@Param("questionId") Integer questionId);
 
     /**
-     * 更改问题的统计信息(点赞数、浏览数等)
-     * @param field
+     * 更改问题的统计信息点赞数
      * @param num
      * @return
      */
-    int updateQuestionStatistic(@Param("field") String field, @Param("num") int num, @Param("userId") Integer userId, @Param("questionId") Integer questionId);
+    int updateQuestionThumbupStatistic(@Param("num") int num, @Param("userId") Integer userId, @Param("questionId") Integer questionId);
 }

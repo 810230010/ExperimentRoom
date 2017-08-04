@@ -132,6 +132,11 @@ public class QuestionController {
         return "discussion/add_question";
     }
 
+    /**
+     * 添加问题
+     * @param question
+     * @return
+     */
     @RequestMapping("/addQuestion")
     @ResponseBody
     public Object addQuestion(Question question){

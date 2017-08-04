@@ -38,13 +38,16 @@
             <li>
                 <a href="index.html"><i class="fa fa-user"></i> <span class="nav-label">个人信息管理</span> <span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse">
-                    <li><a href="/member/memberListPage">个人资料</a></li>
+                    <li><a href="/profile/profileEditPage">个人资料</a></li>
                 </ul>
                 <ul class="nav nav-second-level collapse">
                     <li><a href="/member/memberListPage">我的任务</a></li>
                 </ul>
                 <ul class="nav nav-second-level collapse">
                     <li><a href="/member/memberListPage">我的问题</a></li>
+                </ul>
+                <ul class="nav nav-second-level collapse">
+                    <li id="change_pass"><a href="/profile/updatePasswordPage">密码修改</a></li>
                 </ul>
             </li>
             <li>
