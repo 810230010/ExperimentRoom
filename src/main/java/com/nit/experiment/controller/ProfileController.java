@@ -66,4 +66,13 @@ public class ProfileController {
         int affectedRow = profileService.changePassword(userId, password);
         return result;
     }
+
+    /**
+     * 我的任务页面
+     * @return
+     */
+    @RequestMapping("/myTaskPage")
+    public String view2myTaskPage(){
+        return "profile/my_task";
+    }
 }
