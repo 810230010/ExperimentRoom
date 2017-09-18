@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.nit.experiment.dao.TaskAcceptMapper" >
+  <resultMap id="BaseResultMap" type="com.nit.experiment.entity.TaskAccept" >
+    <id column="accept_task_id" property="acceptTaskId" jdbcType="INTEGER" />
+    <result column="task_id" property="taskId" jdbcType="INTEGER" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="begin_time" property="beginTime" jdbcType="DATE" />
+    <result column="end_time" property="endTime" jdbcType="DATE" />
+    <result column="is_finished" property="isFinished" jdbcType="BIT" />
+    <result column="finished_time" property="finishedTime" jdbcType="DATE" />
+    <result column="task_file" property="taskFile" jdbcType="VARCHAR" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="accept_time" property="acceptTime" jdbcType="TIMESTAMP"/>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    accept_task_id, task_id, user_id, begin_time, end_time, is_finished, finished_time, 
+    task_file, remark, accept_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_task_accept
+    where accept_task_id = #{acceptTaskId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_task_accept
+    where accept_task_id = #{acceptTaskId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.nit.experiment.entity.TaskAccept" >
+    insert into t_task_accept (accept_task_id, task_id, user_id, 
+      begin_time, end_time, is_finished, 
+      finished_time, task_file, remark, 
+      accept_time)
+    values (#{acceptTaskId,jdbcType=INTEGER}, #{taskId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, 
+      #{beginTime,jdbcType=DATE}, #{endTime,jdbcType=DATE}, #{isFinished,jdbcType=BIT}, 
+      #{finishedTime,jdbcType=DATE}, #{taskFile,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
+      #{acceptTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.nit.experiment.entity.TaskAccept" >
+    insert into t_task_accept
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="acceptTaskId != null" >
+        accept_task_id,
+      </if>
+      <if test="taskId != null" >
+        task_id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="beginTime != null" >
+        begin_time,
+      </if>
+      <if test="endTime != null" >
+        end_time,
+      </if>
+      <if test="isFinished != null" >
+        is_finished,
+      </if>
+      <if test="finishedTime != null" >
+        finished_time,
+      </if>
+      <if test="taskFile != null" >
+        task_file,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="acceptTime != null" >
+        accept_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="acceptTaskId != null" >
+        #{acceptTaskId,jdbcType=INTEGER},
+      </if>
+      <if test="taskId != null" >
+        #{taskId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="beginTime != null" >
+        #{beginTime,jdbcType=DATE},
+      </if>
+      <if test="endTime != null" >
+        #{endTime,jdbcType=DATE},
+      </if>
+      <if test="isFinished != null" >
+        #{isFinished,jdbcType=BIT},
+      </if>
+      <if test="finishedTime != null" >
+        #{finishedTime,jdbcType=DATE},
+      </if>
+      <if test="taskFile != null" >
+        #{taskFile,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="acceptTime != null" >
+        #{acceptTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.nit.experiment.entity.TaskAccept" >
+    update t_task_accept
+    <set >
+      <if test="taskId != null" >
+        task_id = #{taskId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="beginTime != null" >
+        begin_time = #{beginTime,jdbcType=DATE},
+      </if>
+      <if test="endTime != null" >
+        end_time = #{endTime,jdbcType=DATE},
+      </if>
+      <if test="isFinished != null" >
+        is_finished = #{isFinished,jdbcType=BIT},
+      </if>
+      <if test="finishedTime != null" >
+        finished_time = #{finishedTime,jdbcType=DATE},
+      </if>
+      <if test="taskFile != null" >
+        task_file = #{taskFile,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="acceptTime != null" >
+        accept_time = #{acceptTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where accept_task_id = #{acceptTaskId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.nit.experiment.entity.TaskAccept" >
+    update t_task_accept
+    set task_id = #{taskId,jdbcType=INTEGER},
+      user_id = #{userId,jdbcType=INTEGER},
+      begin_time = #{beginTime,jdbcType=DATE},
+      end_time = #{endTime,jdbcType=DATE},
+      is_finished = #{isFinished,jdbcType=BIT},
+      finished_time = #{finishedTime,jdbcType=DATE},
+      task_file = #{taskFile,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      accept_time = #{acceptTime,jdbcType=TIMESTAMP}
+    where accept_task_id = #{acceptTaskId,jdbcType=INTEGER}
+  </update>
+</mapper>

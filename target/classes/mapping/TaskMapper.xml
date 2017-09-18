@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.nit.experiment.dao.TaskMapper" >
+  <!--根据状态查询我的任务列表-->
+  <select id="listTaskWithStatus" resultType="com.nit.experiment.dto.MyTaskDTO">
+    select a.task_id, a.task_title, a.description, b.begin_time, b.end_time, b.is_finished, b.finished_time, b.task_file, b.remark, b.accept_time
+    from t_task a, t_task_accept b
+    <where>
+      a.task_id = b.task_id and b.user_id = #{userId} and b.is_finished = #{state}
+      <if test="searchKey != null and searchKey != '' ">
+        and (a.task_title like CONCAT('%', #{searchKey, jdbcType=VARCHAR}, '%')
+        or a.description like CONCAT('%', #{searchKey, jdbcType=VARCHAR}, '%'))
+      </if>
+    </where>
+  </select>
+</mapper>

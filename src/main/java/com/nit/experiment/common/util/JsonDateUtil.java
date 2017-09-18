@@ -23,4 +23,13 @@ public class JsonDateUtil {
             gen.writeString(formattedDate);
         }
     }
+    public static class JsonDateSerializer2 extends JsonSerializer<Date>{
+        private static final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        public void serialize(Date date, JsonGenerator gen, SerializerProvider provider) throws IOException, JsonProcessingException {
+
+            String formattedDate = dateFormat.format(date);
+
+            gen.writeString(formattedDate);
+        }
+    }
 }
