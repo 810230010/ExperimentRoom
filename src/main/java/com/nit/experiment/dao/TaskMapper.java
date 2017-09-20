@@ -2,6 +2,7 @@ package com.nit.experiment.dao;
 
 import com.nit.experiment.common.dao.BaseMapper;
 import com.nit.experiment.dto.MyTaskDTO;
+import com.nit.experiment.dto.TaskDTO;
 import com.nit.experiment.entity.Task;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,4 +22,10 @@ public interface TaskMapper extends BaseMapper<Task, Integer>{
      * @return
      */
     List<MyTaskDTO> listTaskWithStatus(@Param("userId") Integer userId,@Param("state") Integer state, @Param("searchKey") String searchKey, @Param("orderColumn") String orderColumn, @Param("orderType") String orderType);
+
+    /**
+     * 查询所有任务
+     * @return
+     */
+    List<TaskDTO> listAllTasks(@Param("userId") Integer userId);
 }

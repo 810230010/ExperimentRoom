@@ -13,4 +13,11 @@
       </if>
     </where>
   </select>
+  <!--查询所有任务-->
+  <select id="listAllTasks" resultType="com.nit.experiment.dto.TaskDTO">
+    select a.task_id,a.task_title,a.description,b.user_name,c.accept_task_id
+    from t_task a
+    left join t_user b on a.user_id=b.user_id
+    left join t_task_accept c on a.task_id=c.task_id and c.user_id=#{userId}
+  </select>
 </mapper>

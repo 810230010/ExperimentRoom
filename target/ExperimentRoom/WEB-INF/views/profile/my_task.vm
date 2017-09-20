@@ -11,7 +11,7 @@
         <div class="col-lg-12">
             <div class="ibox">
                 <div class="ibox-title">
-                    <a class="btn btn-success">添加任务</a>
+                    <a class="btn btn-success" href="/task/addTaskPage">添加任务</a>
                     <a id="back" hidden="hidden"> <i class="fa fa-reply" style="color: #777777"></i></a>
                 </div>
                 <div class="ibox-content">

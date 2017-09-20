@@ -1,5 +1,7 @@
 package com.nit.experiment.entity;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 
 public class TaskAccept {
@@ -9,18 +11,19 @@ public class TaskAccept {
 
     private Integer userId;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date beginTime;
-
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date endTime;
 
     private Boolean isFinished;
-
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date finishedTime;
 
     private String taskFile;
 
     private String remark;
-
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date acceptTime;
 
     public Integer getAcceptTaskId() {
