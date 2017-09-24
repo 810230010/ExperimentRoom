@@ -9,5 +9,10 @@ import org.apache.ibatis.annotations.Param;
  */
 public interface AnswerMapper extends BaseMapper<Answer, Integer> {
 
-
+    /**
+     * 修改回答采纳状态为已采纳
+     * @param answerId
+     * @return
+     */
+    int updateAnswerAcceptState(@Param("answerId") Integer answerId);
 }

@@ -126,4 +126,7 @@
       answer_time = #{answerTime,jdbcType=TIMESTAMP}
     where answer_id = #{answerId,jdbcType=INTEGER}
   </update>
+  <update id="updateAnswerAcceptState">
+    update t_answer set is_accept = 1 where answer_id = #{answerId}
+  </update>
 </mapper>

@@ -51,7 +51,7 @@
                 </ul>
               #end
                 <ul class="nav nav-second-level collapse">
-                    <li id="myquestion"><a href="/member/memberListPage">我的问题</a></li>
+                    <li id="myquestion"><a href="/profile/myQuestionPage">我的问题</a></li>
                 </ul>
                 <ul class="nav nav-second-level collapse">
                     <li id="change_pass"><a href="/profile/updatePasswordPage">密码修改</a></li>

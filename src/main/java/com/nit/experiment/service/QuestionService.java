@@ -1,5 +1,6 @@
 package com.nit.experiment.service;
 
+import com.nit.experiment.dto.MyQuestionDTO;
 import com.nit.experiment.dto.QuestionDetailDTO;
 import com.nit.experiment.dto.QuestionListDTO;
 import com.nit.experiment.entity.Question;
@@ -62,4 +63,5 @@ public interface QuestionService {
       * @return
       */
      int addQuestion(Question question);
+
 }

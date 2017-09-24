@@ -1,6 +1,7 @@
 package com.nit.experiment.dao;
 
 import com.nit.experiment.common.dao.BaseMapper;
+import com.nit.experiment.dto.MyQuestionDTO;
 import com.nit.experiment.dto.QuestionDetailDTO;
 import com.nit.experiment.dto.QuestionListDTO;
 import com.nit.experiment.entity.Question;
@@ -80,4 +81,14 @@ public interface QuestionMapper extends BaseMapper<Question, Integer>{
      * @return
      */
     int updateQuestionThumbupStatistic(@Param("num") int num, @Param("userId") Integer userId, @Param("questionId") Integer questionId);
+
+    /**
+     * 查询我的问题
+     * @param searchKey
+     * @param orderColumn
+     * @param orderType
+     * @param userId
+     * @return
+     */
+    List<MyQuestionDTO> listMyQuestions(@Param("searchKey") String searchKey, @Param("orderColumn") String orderColumn, @Param("orderType") String orderType, @Param("userId") Integer userId);
 }

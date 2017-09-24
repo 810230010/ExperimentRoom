@@ -83,6 +83,11 @@
                <!--selectByExampleQueryId="false">-->
 
         <!--</table>-->
+        <table tableName="t_learning_resource" domainObjectName="Resource"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
 
+        </table>
     </context>
 </generatorConfiguration>

@@ -51,7 +51,7 @@
                 </ul>
               #end
                 <ul class="nav nav-second-level collapse">
-                    <li id="myquestion"><a href="/member/memberListPage">我的问题</a></li>
+                    <li id="myquestion"><a href="/profile/myQuestionPage">我的问题</a></li>
                 </ul>
                 <ul class="nav nav-second-level collapse">
                     <li id="change_pass"><a href="/profile/updatePasswordPage">密码修改</a></li>
@@ -61,7 +61,7 @@
                 <a href="/task/addTaskPage"><i class="fa fa-building-o"></i> <span class="nav-label">任务大厅</span></a>
             </li>
             <li>
-                <a href="index.html"><i class="fa fa-book"></i> <span class="nav-label">学习资源</span></a>
+                <a href="/resource/resourceAreaPage"><i class="fa fa-book"></i> <span class="nav-label">学习资源</span></a>
             </li>
         </ul>
 

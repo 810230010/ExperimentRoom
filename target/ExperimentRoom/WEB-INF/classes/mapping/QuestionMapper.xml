@@ -67,6 +67,22 @@
     on a.question_id = b.question_id
     where a.question_id = #{questionId}
   </select>
+  <!--查询我的问题列表-->
+  <select id="listMyQuestions" resultType="com.nit.experiment.dto.MyQuestionDTO">
+    select question_id, title, category, view_no, thumbup_no, answer_no, create_time from t_question
+    <where>
+      user_id=#{userId}
+      <if test="searchKey != null and searchKey != '' ">
+        and (title like CONCAT('%', #{searchKey, jdbcType=VARCHAR}, '%')
+        or category like CONCAT('%', #{searchKey, jdbcType=VARCHAR}, '%'))
+      </if>
+    </where>
+    order by
+    <if test="orderColumn != null and orderColumn !='' and orderType != null and orderType != '' ">
+      ${orderColumn} ${orderType},
+    </if>
+    question_id asc
+  </select>
   <!--更改问题统计情况-->
   <update id="updateQuestionThumbupStatistic">
     update t_question

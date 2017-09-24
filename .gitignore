@@ -7,3 +7,5 @@
 *.iml
 out
 gen push
+experiment_room.properties
+jdbc.properties
